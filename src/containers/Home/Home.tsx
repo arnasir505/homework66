@@ -6,6 +6,7 @@ import { ApiMeals, Meal } from '../../types';
 
 const Home = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
+  const totalCalories = meals.reduce((acc, meal) => acc + meal.calories, 0);
 
   const fetchMeals = useCallback(async () => {
     try {
@@ -37,7 +38,7 @@ const Home = () => {
     <div className='container'>
       <div className='d-flex align-items-center justify-content-between py-4'>
         <p className='fs-5'>
-          Total calories: <span className='fw-bold'>900 kcal</span>
+          Total calories: <span className='fw-bold'>{totalCalories} kcal</span>
         </p>
         <Link to={'/meals/new'} className='btn btn-primary'>
           Add new meal
