@@ -34,7 +34,15 @@ const Home = () => {
           Add new meal
         </Link>
       </div>
-      {meals.map(meal => (<MealItem/>))}
+      {meals.map((meal) => (
+        <MealItem
+          key={meal.id}
+          id={meal.id}
+          time={meal.time}
+          name={meal.name}
+          calories={meal.calories}
+        />
+      ))}
     </div>
   );
 };

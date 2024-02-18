@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Home from './containers/Home/Home';
-import MealEditor from './containers/Home/MealEditor/MealEditor';
+import MealEditor from './containers/MealEditor/MealEditor';
 
 function App() {
   return (

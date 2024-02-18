@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { MEAL_TIMES } from '../../../constants';
-import { MutableMeal } from '../../../types';
+import { MEAL_TIMES } from '../../constants';
+import { MutableMeal } from '../../types';
 import './MealEditor.css';
-import axiosApi from '../../../axiosApi';
+import axiosApi from '../../axiosApi';
 
 const MealEditor = () => {
   const [meal, setMeal] = useState<MutableMeal>({
