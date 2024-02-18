@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import MealItem from '../../components/MealItem/MealItem';
 
 const Home = () => {
   return (
@@ -7,8 +9,15 @@ const Home = () => {
         <p className='fs-5'>
           Total calories: <span className='fw-bold'>900 kcal</span>
         </p>
-        <button className='btn btn-primary'>Add new meal</button>
+        <Link to={'/meals/new'} className='btn btn-primary'>
+          Add new meal
+        </Link>
       </div>
+      <MealItem/>
+      <MealItem/>
+      <MealItem/>
+      <MealItem/>
+      <MealItem/>
     </div>
   );
 };
