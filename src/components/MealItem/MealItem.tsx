@@ -1,4 +1,3 @@
-import React from 'react';
 import editIcon from '../../assets/icons/pencil-square.svg';
 import trashIcon from '../../assets/icons/trash.svg';
 import './MealItem.css';
