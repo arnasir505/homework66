@@ -8,15 +8,19 @@ const Home = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
 
   const fetchMeals = useCallback(async () => {
-    const response = await axiosApi.get<ApiMeals | null>('/meals.json');
-    const meals = response.data;
-    if (meals) {
-      setMeals(
-        Object.keys(meals).map((id) => ({
-          ...meals[id],
-          id: id,
-        }))
-      );
+    try {
+      const response = await axiosApi.get<ApiMeals | null>('/meals.json');
+      const meals = response.data;
+      if (meals) {
+        setMeals(
+          Object.keys(meals).map((id) => ({
+            ...meals[id],
+            id: id,
+          }))
+        );
+      }
+    } catch (error) {
+      console.log(error)
     }
   }, []);
 

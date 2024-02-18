@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/meals/new' element={<MealEditor />} />
+        <Route path='/meals/edit/:id' element={<MealEditor />} />
         <Route
           path='*'
           element={<h1 className='text-center mt-5'>Not Found!</h1>}
