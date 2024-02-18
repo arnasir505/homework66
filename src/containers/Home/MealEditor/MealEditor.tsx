@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { MEAL_TIMES } from '../../../constants';
-import { Meal, MutableMeal } from '../../../types';
+import { MutableMeal } from '../../../types';
 import './MealEditor.css';
 import axiosApi from '../../../axiosApi';
 
