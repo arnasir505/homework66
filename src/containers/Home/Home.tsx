@@ -20,9 +20,14 @@ const Home = () => {
         );
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, []);
+
+  const deleteMeal = async (id: string) => {
+    await axiosApi.delete(`/meals/${id}.json`);
+    void fetchMeals();
+  };
 
   useEffect(() => {
     void fetchMeals();
@@ -45,6 +50,7 @@ const Home = () => {
           time={meal.time}
           name={meal.name}
           calories={meal.calories}
+          deleteMeal={deleteMeal}
         />
       ))}
     </div>

@@ -9,9 +9,16 @@ interface Props {
   time: string;
   name: string;
   calories: number;
+  deleteMeal: (id: string) => void;
 }
 
-const MealItem: React.FC<Props> = ({ id, time, name, calories }) => {
+const MealItem: React.FC<Props> = ({
+  id,
+  time,
+  name,
+  calories,
+  deleteMeal,
+}) => {
   return (
     <div className='card mb-3'>
       <div className='card-body d-flex align-items-center justify-content-between'>
@@ -26,7 +33,7 @@ const MealItem: React.FC<Props> = ({ id, time, name, calories }) => {
           <Link to={`/meals/edit/${id}`} className='btn ms-5'>
             <img src={editIcon} alt='edit' className='icon' />
           </Link>
-          <button className='btn ms-2'>
+          <button className='btn ms-2' onClick={() => deleteMeal(id)}>
             <img src={trashIcon} alt='delete' className='icon' />
           </button>
         </div>

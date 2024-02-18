@@ -61,7 +61,7 @@ const MealEditor = () => {
     <div className='container'>
       <div className='col-md-6 py-3'>
         <h2 className='mb-3'>{params.id ? 'Edit meal' : 'Add meal'}</h2>
-        <form onSubmit={(e) => handleSubmit(e)} autoComplete='on'>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <div className='mb-3'>
             <select
               name='time'
@@ -86,6 +86,7 @@ const MealEditor = () => {
               name='name'
               className='form-control'
               placeholder='Meal description'
+              autoComplete='on'
               required
               value={meal.name}
               onChange={(e) => handleChange(e)}
