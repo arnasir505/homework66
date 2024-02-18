@@ -14,9 +14,11 @@ const MealEditor = () => {
     name: '',
     calories: '',
   });
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const fetchMeal = useCallback(async () => {
     try {
+      setIsDisabled(true);
       const response = await axiosApi.get<ApiMeal | null>(
         `/meals/${params.id}.json`
       );
@@ -25,8 +27,11 @@ const MealEditor = () => {
         const newMeal = { ...meal, calories: meal.calories.toString() };
         setMeal(newMeal);
       }
+      setIsDisabled(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsDisabled(false);
     }
   }, [params.id]);
 
@@ -49,11 +54,27 @@ const MealEditor = () => {
       calories: Number(meal.calories),
     };
     if (params.id) {
-      await axiosApi.put(`/meals/${params.id}.json`, newMeal);
+      try {
+        setIsDisabled(true);
+        await axiosApi.put(`/meals/${params.id}.json`, newMeal);
+        setIsDisabled(false);
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setIsDisabled(false)
+      }
     } else {
-      await axiosApi.post('/meals.json', newMeal);
-      navigate('/');
-      setMeal({ time: '', name: '', calories: '' });
+      try {
+        setIsDisabled(true);
+        await axiosApi.post('/meals.json', newMeal);
+        setIsDisabled(false);
+        navigate('/');
+        setMeal({ time: '', name: '', calories: '' });
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setIsDisabled(false)
+      }
     }
   };
 
@@ -104,8 +125,21 @@ const MealEditor = () => {
             />
             <span className='fw-bold'>kcal</span>
           </div>
-          <button type='submit' className='btn btn-primary'>
-            Save
+          <button
+            type='submit'
+            className={`btn btn-primary ${isDisabled ? 'disabled' : ''}`}
+          >
+            {isDisabled ? (
+              <>
+                <span
+                  className='spinner-border spinner-border-sm'
+                  aria-hidden='true'
+                ></span>
+                <span role='status'> Saving...</span>
+              </>
+            ) : (
+              'Save'
+            )}
           </button>
         </form>
       </div>
