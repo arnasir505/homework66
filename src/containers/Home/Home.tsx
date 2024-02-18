@@ -8,7 +8,6 @@ import Spinner from '../../components/Spinner/Spinner';
 const Home = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
   const totalCalories = meals.reduce((acc, meal) => acc + meal.calories, 0);
 
   const fetchMeals = useCallback(async () => {
@@ -34,14 +33,10 @@ const Home = () => {
 
   const deleteMeal = async (id: string) => {
     try {
-      setIsDisabled(true);
       await axiosApi.delete(`/meals/${id}.json`);
-      setIsDisabled(false);
       setMeals((prevState) => prevState.filter((meal) => meal.id !== id));
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsDisabled(false);
     }
   };
 
@@ -66,7 +61,6 @@ const Home = () => {
             name={meal.name}
             calories={meal.calories}
             deleteMeal={deleteMeal}
-            isDisabled={isDisabled}
           />
         ))}
       </>

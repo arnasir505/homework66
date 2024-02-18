@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import editIcon from '../../assets/icons/pencil-square.svg';
 import trashIcon from '../../assets/icons/trash.svg';
 import './MealItem.css';
@@ -10,7 +10,6 @@ interface Props {
   name: string;
   calories: number;
   deleteMeal: (id: string) => void;
-  isDisabled: boolean;
 }
 
 const MealItem: React.FC<Props> = ({
@@ -19,8 +18,8 @@ const MealItem: React.FC<Props> = ({
   name,
   calories,
   deleteMeal,
-  isDisabled,
 }) => {
+  const [disabled, setDisabled] = useState(false);
   return (
     <div className='card mb-3'>
       <div className='card-body d-flex align-items-center justify-content-between'>
@@ -36,8 +35,10 @@ const MealItem: React.FC<Props> = ({
             <img src={editIcon} alt='edit' className='icon' />
           </Link>
           <button
-            className={`btn ms-2 ${isDisabled ? 'disabled' : ''}`}
-            onClick={() => deleteMeal(id)}
+            className={`btn ms-2 ${disabled ? 'disabled' : ''}`}
+            onClick={async () => (
+              setDisabled(true), await deleteMeal(id), setDisabled(false)
+            )}
           >
             <img src={trashIcon} alt='delete' className='icon' />
           </button>
